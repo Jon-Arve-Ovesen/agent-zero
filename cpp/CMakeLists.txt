@@ -35,6 +35,20 @@ target_include_directories(agent_zero_core PUBLIC
     $<INSTALL_INTERFACE:include>
 )
 
+# Set output directories for multi-config generators (Visual Studio)
+# This ensures that the library is placed in the correct location for linking
+if(CMAKE_CONFIGURATION_TYPES)
+    set_target_properties(agent_zero_core PROPERTIES
+        ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIG>"
+        LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIG>"
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIG>"
+    )
+    # Set output directories for examples and tests too
+    set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIG>")
+    set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIG>")
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIG>")
+endif()
+
 # Enable modern C++ features
 target_compile_features(agent_zero_core PUBLIC cxx_std_17)
 
