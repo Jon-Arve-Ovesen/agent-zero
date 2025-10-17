@@ -43,11 +43,6 @@ jobs:
         cd cpp/bindings/node
         npm install
     
-    - name: Build bindings
-      run: |
-        cd cpp/bindings/node
-        npm run install
-    
     - name: Test bindings
       run: |
         cd cpp/bindings/node
@@ -59,6 +54,7 @@ jobs:
         name: node-bindings-${{ matrix.os }}-node${{ matrix.node-version }}
         path: cpp/bindings/node/build/Release/*.node
         retention-days: 7
+        if-no-files-found: warn
 
   publish-npm:
     name: Publish to npm
@@ -84,7 +80,6 @@ jobs:
       run: |
         cd cpp/bindings/node
         npm install
-        npm run install
     
     - name: Publish to npm
       run: |
