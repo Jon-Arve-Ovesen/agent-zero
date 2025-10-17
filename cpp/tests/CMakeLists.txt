@@ -25,6 +25,9 @@ target_link_libraries(agent_zero_tests
     PRIVATE GTest::gtest_main
 )
 
+# Ensure agent_zero_core is built before tests
+add_dependencies(agent_zero_tests agent_zero_core)
+
 # Set output directories for multi-config generators (Visual Studio)
 if(CMAKE_CONFIGURATION_TYPES)
     set_target_properties(agent_zero_tests PROPERTIES

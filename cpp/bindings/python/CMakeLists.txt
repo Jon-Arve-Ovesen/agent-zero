@@ -24,6 +24,9 @@ pybind11_add_module(agent_zero_native MODULE
 
 target_link_libraries(agent_zero_native PRIVATE agent_zero_core)
 
+# Ensure agent_zero_core is built before Python bindings
+add_dependencies(agent_zero_native agent_zero_core)
+
 # Installation
 install(TARGETS agent_zero_native
     LIBRARY DESTINATION ${Python3_SITELIB}
