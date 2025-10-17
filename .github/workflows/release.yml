@@ -19,7 +19,6 @@ jobs:
     name: Create Release
     runs-on: ubuntu-latest
     outputs:
-      upload_url: ${{ steps.create_release.outputs.upload_url }}
       version: ${{ steps.get_version.outputs.version }}
     
     steps:
@@ -32,14 +31,13 @@ jobs:
           echo "version=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
         fi
     
+    - uses: actions/checkout@v4
+    
     - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: softprops/action-gh-release@v1
       with:
         tag_name: ${{ steps.get_version.outputs.version }}
-        release_name: Agent Zero ${{ steps.get_version.outputs.version }}
+        name: Agent Zero ${{ steps.get_version.outputs.version }}
         draft: false
         prerelease: false
         body: |
@@ -60,6 +58,11 @@ jobs:
           
           ## Documentation
           See the [README](https://github.com/${{ github.repository }}/blob/main/README.md) for installation and usage instructions.
+        files: |
+          *.tar.gz
+          *.zip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   build-release-artifacts:
     name: Build Release Artifacts
@@ -121,15 +124,13 @@ jobs:
         Copy-Item -Path "README.md" -Destination "release-package\"
         Compress-Archive -Path release-package -DestinationPath "${{ matrix.artifact_name }}-${{ needs.create-release.outputs.version }}.${{ matrix.archive_ext }}"
     
-    - name: Upload Release Asset
-      uses: actions/upload-release-asset@v1
+    - name: Upload Release Assets
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ needs.create-release.outputs.version }}
+        files: ${{ matrix.artifact_name }}-${{ needs.create-release.outputs.version }}.${{ matrix.archive_ext }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ needs.create-release.outputs.upload_url }}
-        asset_path: ./${{ matrix.artifact_name }}-${{ needs.create-release.outputs.version }}.${{ matrix.archive_ext }}
-        asset_name: ${{ matrix.artifact_name }}-${{ needs.create-release.outputs.version }}.${{ matrix.archive_ext }}
-        asset_content_type: application/octet-stream
 
   build-python-wheels:
     name: Build Python Wheels

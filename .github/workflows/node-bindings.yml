@@ -43,11 +43,6 @@ jobs:
         cd cpp/bindings/node
         npm install
     
-    - name: Build bindings
-      run: |
-        cd cpp/bindings/node
-        npm run install
-    
     - name: Test bindings
       run: |
         cd cpp/bindings/node
@@ -84,7 +79,6 @@ jobs:
       run: |
         cd cpp/bindings/node
         npm install
-        npm run install
     
     - name: Publish to npm
       run: |

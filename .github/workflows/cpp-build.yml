@@ -186,8 +186,10 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: python-bindings-${{ matrix.os }}-py${{ matrix.python-version }}
-        path: cpp/build/bindings/python/*.so
+        path: |
+          cpp/build/bindings/python/agent_zero_native.*
         retention-days: 7
+        if-no-files-found: warn
 
   code-quality:
     name: Code Quality Checks
