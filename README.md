@@ -52,6 +52,15 @@ From now on, please use this name for both `git clone` and `docker pull` command
 
 # 💡 Key Features
 
+## 🚀 NEW: C++ Backend with Multi-Language Support
+
+- **High-Performance C++ Core**: Native C++ backend for performance-critical operations
+- **Multi-Paradigm Programming**: Support for OOP, Functional, and Procedural programming styles
+- **Multi-Language Bindings**: Use Agent Zero from Python, Node.js, and more
+- **Cross-Platform**: Works on Linux, macOS, and Windows
+- **Comprehensive CI/CD**: Automated builds and releases for all platforms
+- **Read more**: See [cpp/README.md](./cpp/README.md) for details
+
 1. **General-purpose Assistant**
 
 - Agent Zero is not pre-programmed for specific tasks (but can be). It is meant to be a general-purpose personal assistant. Give it a task, and it will gather information, execute commands and code, cooperate with other agent instances, and do its best to accomplish it.

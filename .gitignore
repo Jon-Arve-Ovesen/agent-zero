@@ -40,3 +40,32 @@ instruments/**
 # Global rule to include .gitkeep files anywhere
 !**/.gitkeep
 agent_history.gif
+
+# C++ build artifacts
+cpp/build/
+cpp/cmake-build-*/
+cpp/.cache/
+cpp/compile_commands.json
+cpp/**/*.o
+cpp/**/*.a
+cpp/**/*.so
+cpp/**/*.dylib
+cpp/**/*.dll
+cpp/**/*.exe
+
+# Node.js bindings
+cpp/bindings/node/build/
+cpp/bindings/node/node_modules/
+cpp/bindings/node/package-lock.json
+
+# Python bindings
+cpp/bindings/python/build/
+cpp/bindings/python/*.egg-info/
+cpp/bindings/python/dist/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
