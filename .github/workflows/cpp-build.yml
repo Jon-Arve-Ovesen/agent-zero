@@ -172,10 +172,20 @@ jobs:
         python -m pip install --upgrade pip
         pip install pybind11 pytest numpy
     
-    - name: Configure CMake
+    - name: Configure CMake (Unix)
+      if: runner.os != 'Windows'
       run: |
         cd cpp
         cmake -B build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DBUILD_PYTHON_BINDINGS=ON -DBUILD_TESTS=OFF
+    
+    - name: Configure CMake (Windows)
+      if: runner.os == 'Windows'
+      run: |
+        cd cpp
+        cmake -B build -G "Visual Studio 17 2022" -A x64 `
+          -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} `
+          -DBUILD_PYTHON_BINDINGS=ON `
+          -DBUILD_TESTS=OFF
     
     - name: Build Python Bindings
       run: |
