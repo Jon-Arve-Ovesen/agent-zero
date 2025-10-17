@@ -1,0 +1,26 @@
+{
+  "name": "agent-zero-native",
+  "version": "0.9.6",
+  "description": "Agent Zero C++ Backend - Node.js bindings",
+  "main": "index.js",
+  "scripts": {
+    "install": "node-gyp rebuild",
+    "test": "node test.js"
+  },
+  "gypfile": true,
+  "keywords": [
+    "agent",
+    "ai",
+    "agent-zero",
+    "native",
+    "cpp"
+  ],
+  "author": "Agent Zero Team",
+  "license": "MIT",
+  "dependencies": {
+    "node-addon-api": "^7.0.0"
+  },
+  "devDependencies": {
+    "node-gyp": "^10.0.0"
+  }
+}

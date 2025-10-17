@@ -1,0 +1,10 @@
+cmake_minimum_required(VERSION 3.15)
+
+add_executable(basic_usage basic_usage.cpp)
+target_link_libraries(basic_usage agent_zero_core)
+
+add_executable(multi_paradigm multi_paradigm.cpp)
+target_link_libraries(multi_paradigm agent_zero_core)
+
+add_executable(task_executor_example task_executor_example.cpp)
+target_link_libraries(task_executor_example agent_zero_core)
