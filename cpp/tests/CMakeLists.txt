@@ -28,12 +28,5 @@ target_link_libraries(agent_zero_tests
 # Ensure agent_zero_core is built before tests
 add_dependencies(agent_zero_tests agent_zero_core)
 
-# Set output directories for multi-config generators (Visual Studio)
-if(CMAKE_CONFIGURATION_TYPES)
-    set_target_properties(agent_zero_tests PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIG>"
-    )
-endif()
-
 include(GoogleTest)
 gtest_discover_tests(agent_zero_tests)
