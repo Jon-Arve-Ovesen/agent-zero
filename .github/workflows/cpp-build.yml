@@ -137,7 +137,7 @@ jobs:
         name: agent-zero-cpp-windows
         path: |
           cpp/build/${{env.BUILD_TYPE}}/agent_zero_core.*
-          cpp/build/examples/${{env.BUILD_TYPE}}/*
+          cpp/build/${{env.BUILD_TYPE}}/*example*
         retention-days: 7
         if-no-files-found: warn
 
