@@ -54,6 +54,7 @@ jobs:
         name: node-bindings-${{ matrix.os }}-node${{ matrix.node-version }}
         path: cpp/bindings/node/build/Release/*.node
         retention-days: 7
+        if-no-files-found: warn
 
   publish-npm:
     name: Publish to npm

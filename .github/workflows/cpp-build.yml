@@ -56,6 +56,7 @@ jobs:
           cpp/build/libagent_zero_core.*
           cpp/build/examples/*
         retention-days: 7
+        if-no-files-found: warn
 
   build-macos:
     name: Build on macOS
@@ -97,6 +98,7 @@ jobs:
           cpp/build/libagent_zero_core.*
           cpp/build/examples/*
         retention-days: 7
+        if-no-files-found: warn
 
   build-windows:
     name: Build on Windows
@@ -135,8 +137,9 @@ jobs:
         name: agent-zero-cpp-windows
         path: |
           cpp/build/${{env.BUILD_TYPE}}/agent_zero_core.*
-          cpp/build/${{env.BUILD_TYPE}}/examples/*
+          cpp/build/examples/${{env.BUILD_TYPE}}/*
         retention-days: 7
+        if-no-files-found: warn
 
   build-python-bindings:
     name: Build Python Bindings
