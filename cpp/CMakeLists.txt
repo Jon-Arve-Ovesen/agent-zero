@@ -16,6 +16,14 @@ option(BUILD_EXAMPLES "Build examples" ON)
 # Export compile commands for IDEs
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+# Set output directories for multi-config generators (Visual Studio)
+# This must be set before any targets are created
+if(CMAKE_CONFIGURATION_TYPES)
+    set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIG>")
+    set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIG>")
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIG>")
+endif()
+
 # Include directories
 include_directories(include)
 
@@ -34,20 +42,6 @@ target_include_directories(agent_zero_core PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:include>
 )
-
-# Set output directories for multi-config generators (Visual Studio)
-# This ensures that the library is placed in the correct location for linking
-if(CMAKE_CONFIGURATION_TYPES)
-    set_target_properties(agent_zero_core PROPERTIES
-        ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIG>"
-        LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIG>"
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIG>"
-    )
-    # Set output directories for examples and tests too
-    set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIG>")
-    set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIG>")
-    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIG>")
-endif()
 
 # Enable modern C++ features
 target_compile_features(agent_zero_core PUBLIC cxx_std_17)
