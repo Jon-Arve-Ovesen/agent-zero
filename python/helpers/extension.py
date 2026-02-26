@@ -1,4 +1,4 @@
-from abc import abstractmethod
+from abc import ABC, abstractmethod
 from typing import Any
 from python.helpers import extract_tools, files
 from typing import TYPE_CHECKING
@@ -13,7 +13,7 @@ USER_EXTENSIONS_FOLDER = "usr/extensions"
 _cache: dict[str, list[type["Extension"]]] = {}
 
 
-class Extension:
+class Extension(ABC):
 
     def __init__(self, agent: "Agent|None", **kwargs):
         self.agent: "Agent" = agent  # type: ignore < here we ignore the type check as there are currently no extensions without an agent

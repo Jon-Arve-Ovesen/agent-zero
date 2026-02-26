@@ -1,4 +1,4 @@
-from abc import abstractmethod
+from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from typing import Any
 
@@ -13,7 +13,7 @@ class Response:
     break_loop: bool
     additional: dict[str, Any] | None = None
 
-class Tool:
+class Tool(ABC):
 
     def __init__(self, agent: Agent, name: str, method: str | None, args: dict[str,str], message: str, loop_data: LoopData | None, **kwargs) -> None:
         self.agent = agent
